@@ -1,0 +1,24 @@
+Quels sont les éléments à considérer pour faire évoluer votre code afin qu’il puisse gérer de grosses volumétries de données (fichiers de plusieurs To ou millions de fichiers par exemple) ?
+Pourriez-vous décrire les modifications qu’il faudrait apporter, s’il y en a, pour prendre en considération de telles volumétries ?
+
+
+ pd.read_csv(...) 
+ Pour le chargement de fichier de plusieurs To, la fonction pd.read_csv() de pandas génèrera une exception de mémoire insuffisante. 
+ 
+ 
+ Pour le chargement de millions de fichiers, il faudrait modifier la partie "Load files in dataframes". Créer une fonction qui permet de charger chaque nouveau fichier entrant et de le transformer en dataframe. Il faudrait également créer un pub/sub pour détecter tous les événements de réception de nouveau fichier dans un datalake et lancer le chargement du fichier en transformation en dataframe.
+ Utiliser une solution de dataprep (dataflow ou autre etl) pour veiller à ce que les fichiers reçus soient au bon format.
+
+Pour toute la partie jointure entre les fichiers et transformation de format, il serait nécessaire de privilégier une solution de type ETL. Cela pourrait être dataflow pour permettre de faire des jointures sur de grosses volumétries.
+pd.concat(..., ...)
+drugs.merge(df3, on='join').drop('join', axis=1)
+df1[['drug', 'title','scientific_title' ,'date', 'journal']].to_json(orient = 'records')
+
+On peut passer par des plateformes de type apache beam ou GCP. Spark via  data proc sur GCP, apache beam via Dataflow sur GCP, pour exécuter tout le code de manière industralisée et surveiller le bon traitement des jobs.
+
+
+
+
+
+
+
