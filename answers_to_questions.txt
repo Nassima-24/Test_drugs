@@ -14,7 +14,7 @@ pd.concat(..., ...)
 drugs.merge(df3, on='join').drop('join', axis=1)
 df1[['drug', 'title','scientific_title' ,'date', 'journal']].to_json(orient = 'records')
 
-On peut passer par des plateformes de type apache beam ou GCP. Spark via  data proc sur GCP, apache beam via Dataflow sur GCP, pour exécuter tout le code de manière industralisée et surveiller le bon traitement des jobs.
+On peut passer par des plateformes de type apache beam ou GCP. Spark via  data proc sur GCP, apache beam via Dataflow sur GCP, pour exécuter tout le code de manière industrialisée et surveiller le bon traitement des jobs.
 
 
 
