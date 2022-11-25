@@ -100,7 +100,7 @@ def create_json(df2=None,df3=None):
   if df3 is None:
     df3 = pd.DataFrame()
   df1 = pd.concat([df2, df3])
-  df1 = df1[['drug', 'title','scientific_title' ,'date', 'journal']].to_json(orient = 'records')
+  df1 = df1[['drug', 'title','scientific_title' ,'date', 'journal']].to_json(date_format = 'iso', indent = 1,force_ascii = False, orient = 'records')
   return df1
 
 """##Lauching functions"""
