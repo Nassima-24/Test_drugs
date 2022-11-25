@@ -83,6 +83,7 @@ def create_df(drugs,df3=None):
   df1 = drugs.merge(df3, on='join').drop('join', axis=1)
   df1['match'] = df1.apply(lambda x: x.upper_title.find(x.drug.upper()), axis=1).ge(0)
   df1 = df1[df1.match == True]
+  df1['date'] = pd.to_datetime(df1['date'])
   return df1
 
 #create a new json file
